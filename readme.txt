@@ -1,2 +1,2 @@
 Welcome to my addon!
-test
+testcd ..
