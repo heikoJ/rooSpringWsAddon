@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
-	<batch>
-		<dependencies>
-			<!-- Ivy-style dependency definition -->
-			<dependency org="org.springframework.batch" name="spring-batch-core" rev="2.1.1.RELEASE" />
-			
-			<!-- Maven-style dependency definition (should be used if exclusions need to be defined) -->
-			<dependency>
-				<groupId>org.springframework.batch</groupId>
-				<artifactId>spring-batch-admin-manager</artifactId>
-				 <version>1.0.0.RELEASE</version>
-			</dependency>
-		</dependencies>
-	</batch>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-core</artifactId>
+            <version>2.2.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </configuration>

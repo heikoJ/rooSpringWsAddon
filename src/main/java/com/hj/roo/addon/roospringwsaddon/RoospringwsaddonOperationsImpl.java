@@ -14,11 +14,7 @@ import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetails;
 import org.springframework.roo.classpath.details.ClassOrInterfaceTypeDetailsBuilder;
 import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
 import org.springframework.roo.model.JavaType;
-import org.springframework.roo.project.ProjectOperations;
-import org.springframework.roo.project.Dependency;
-import org.springframework.roo.project.DependencyScope;
-import org.springframework.roo.project.DependencyType;
-import org.springframework.roo.project.Repository;
+import org.springframework.roo.project.*;
 import org.springframework.roo.support.util.XmlUtils;
 import org.w3c.dom.Element;
 
@@ -97,11 +93,28 @@ public class RoospringwsaddonOperationsImpl implements RoospringwsaddonOperation
         dependencies.add(new Dependency("com.hj.roo.addon.roospringwsaddon", "com.hj.roo.addon.roospringwsaddon", "0.1.0.BUILD-SNAPSHOT", DependencyType.JAR, DependencyScope.PROVIDED));
         
         // Install dependencies defined in external XML file
-        for (Element dependencyElement : XmlUtils.findElements("/configuration/batch/dependencies/dependency", XmlUtils.getConfiguration(getClass()))) {
-            dependencies.add(new Dependency(dependencyElement));
+
+        Element configuration = XmlUtils.getConfiguration(getClass());
+        for(Element depdendencyElement : XmlUtils.findElements(
+                "/configuration/dependencies/dependency",
+                configuration)) {
+            dependencies.add(new Dependency(depdendencyElement));
         }
+
 
         // Add all new dependencies to pom.xml
         projectOperations.addDependencies("", dependencies);
+
+        List<Plugin> plugins = new ArrayList<Plugin>();
+
+        for(Element pluginElement : XmlUtils.findElements(
+            "/configuration/build/plugins/plugin",
+            configuration)) {
+            plugins.add(new Plugin(pluginElement));
+        }
+
+
+        projectOperations.addBuildPlugins("", plugins);
+
     }
 }

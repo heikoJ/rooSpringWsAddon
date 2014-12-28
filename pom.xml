@@ -5,7 +5,7 @@
     <artifactId>com.hj.roo.addon.roospringwsaddon</artifactId>
     <packaging>bundle</packaging>
     <version>0.1.0.BUILD-SNAPSHOT</version>
-    <name>springws-addon</name>
+    <name>springwsaddon</name>
     <organization>
         <name>Your project/company name goes here (used in copyright and vendor information in the manifest)</name>
     </organization>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.annotations</artifactId>
-            <version>1.6.0</version>
+            <version>1.9.0</version>
         </dependency>
         <!-- Spring Roo modules -->
         <dependency>
